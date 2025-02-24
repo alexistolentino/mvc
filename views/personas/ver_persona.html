@@ -1,0 +1,21 @@
+$def with (id, persona)
+
+<h1>Detalles de Persona</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <td>${id}</td>
+    </tr>
+    <tr>
+        <th>Nombre</th>
+        <td>${persona['nombre']}</td>
+    </tr>
+    <tr>
+        <th>Teléfono</th>
+        <td>${persona.get('telefono', 'No disponible')}</td>
+    </tr>
+</table>
+
+<a href="/lista_personas" class="btn btn-secondary">Volver</a>
+

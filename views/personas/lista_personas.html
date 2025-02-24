@@ -1,0 +1,30 @@
+$def with (datos)
+
+<h1>Lista de Personas</h1>
+<a href="/insertar_personas">
+    <button class="btn btn-primary">Insertar personas</button>
+</a>
+
+<table class="table table-striped mt-3 table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        $for key, persona in datos.items():
+            <tr>
+                <td>${key}</td>
+                <td>${persona['nombre']}</td>
+                <td>
+                    <a href="/ver_persona/${key}" class="btn btn-info btn-sm">Detalles</a>
+                    <a href="/editar_persona/${key}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="/eliminar_persona/${key}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres eliminar?');">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+    </tbody>
+</table>
