@@ -2,18 +2,17 @@ import web  # Carga la librería web.py
 from controllers.index import Index
 from controllers.personas.lista_personas import ListaPersonas
 from controllers.personas.insertar_personas import InsertarPersonas
+from controllers.personas.ver_persona import VerPersona
 
 urls = (
     '/', 'Index',
     '/lista_personas', 'ListaPersonas',
     '/insertar_personas', 'InsertarPersonas',
+    '/guardar_persona', 'InsertarPersonas',  # Usar la misma clase controladora 
     '/favicon.ico', 'Favicon',
-    "/insertar_personas", "controllers.personas.insertar_personas.InsertarPersonas",
-    "/guardar_persona", "controllers.personas.insertar_personas.InsertarPersonas",
     "/ver_persona/(.*)", "VerPersona",
     "/editar_persona/(.*)", "EditarPersona",
     "/eliminar_persona/(.*)", "EliminarPersona"
-
 )
 
 app = web.application(urls, globals())

@@ -20,16 +20,46 @@ class Personas:
             response = {
                 "status": 200,
                 "message": "Todo bien :3",
-                "personas": dict(personas.val())  # Se corrigió el error de sintaxis
+                "personas": dict(personas.val()) if personas.val() else {}
             }
             return response
         except Exception as error:
             response = {
                 "status": 400,
-                "message": "Error en el servidor",
+                "message": f"Error en el servidor: {error}",
                 "personas": {}
             }
             return response
-
-persona = Personas()
-print(f"{persona.lista_personas()}")
+    
+    def insertar_persona(self, nombre, telefono=""):
+        try:
+            # Validación básica
+            if not nombre or nombre.strip() == "":
+                return {
+                    "status": 400,
+                    "message": "El nombre es un campo obligatorio",
+                    "id": None
+                }
+            
+            # Crear objeto de datos para la nueva persona
+            nueva_persona = {
+                "nombre": nombre.strip(),
+                "telefono": telefono.strip()
+            }
+            
+            # Insertar en Firebase
+            resultado = db.child("personas").push(nueva_persona)
+            
+            # Retornar respuesta exitosa
+            return {
+                "status": 200,
+                "message": "Persona insertada correctamente",
+                "id": resultado["name"]  # Esto devuelve el ID generado por Firebase
+            }
+        except Exception as error:
+            # Manejar cualquier error
+            return {
+                "status": 500,
+                "message": f"Error al insertar persona: {error}",
+                "id": None
+            }
